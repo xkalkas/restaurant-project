@@ -11,4 +11,13 @@
         <exec.mainClass>com.mycompany.mavenproject1.RestaurantGUI</exec.mainClass>
     </properties>
     <name>RestaurantProject</name>
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.4</version>
+        </dependency>
+    </dependencies>
+    
 </project>
