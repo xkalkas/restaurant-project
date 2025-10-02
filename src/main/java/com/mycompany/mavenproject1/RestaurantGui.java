@@ -1,7 +1,7 @@
 package com.mycompany.mavenproject1;
 
 import java.sql.*;
-import javax.swing.JComponent;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Xkalk
@@ -86,18 +86,20 @@ public class RestaurantGui extends javax.swing.JFrame {
 
         customersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         customersScroll.setViewportView(customersTable);
 
         showCustBtn.setText("Show");
+        showCustBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showCustBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout customersPanelLayout = new javax.swing.GroupLayout(customersPanel);
         customersPanel.setLayout(customersPanelLayout);
@@ -117,25 +119,27 @@ public class RestaurantGui extends javax.swing.JFrame {
                 .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showCustBtn)
                     .addComponent(customersScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Customers", customersPanel);
 
         employeesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         employeesScroll.setViewportView(employeesTable);
 
         showEmpBtn.setText("Show");
+        showEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showEmpBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout employeesPanelLayout = new javax.swing.GroupLayout(employeesPanel);
         employeesPanel.setLayout(employeesPanelLayout);
@@ -155,25 +159,19 @@ public class RestaurantGui extends javax.swing.JFrame {
                 .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showEmpBtn)
                     .addComponent(employeesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Employees", employeesPanel);
 
-        orderTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         orderScroll.setViewportView(orderTable);
 
         showOrderBtn.setText("Show");
+        showOrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showOrderBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
@@ -193,25 +191,19 @@ public class RestaurantGui extends javax.swing.JFrame {
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showOrderBtn)
                     .addComponent(orderScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Orders", orderPanel);
 
-        MenuTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         menuScroll.setViewportView(MenuTable);
 
         showMenuBtn.setText("Show");
+        showMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showMenuBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -231,25 +223,19 @@ public class RestaurantGui extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showMenuBtn)
                     .addComponent(menuScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Menu", menuPanel);
 
-        reservationTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         reservationScroll.setViewportView(reservationTable);
 
         showResBtn.setText("Show");
+        showResBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showResBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout reservationPanelLayout = new javax.swing.GroupLayout(reservationPanel);
         reservationPanel.setLayout(reservationPanelLayout);
@@ -269,7 +255,7 @@ public class RestaurantGui extends javax.swing.JFrame {
                 .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showResBtn)
                     .addComponent(reservationScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Reservations", reservationPanel);
@@ -311,6 +297,171 @@ public class RestaurantGui extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void showCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCustBtnActionPerformed
+        try{
+        Statement statement=connection.createStatement();
+        String query="SELECT * FROM getCustomers()";
+        ResultSet rs = statement.executeQuery(query);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
+        
+        //get columns
+        int cols = rsmd.getColumnCount();
+        String[] colName=new String[cols];
+        for(int i=0;i<cols;i++)
+            colName[i]=rsmd.getColumnName(i+1);
+        model.setColumnIdentifiers(colName);
+        
+        //populate rows
+        while(rs.next()){
+            Object[] row = new Object[cols];
+            for(int i=1; i<= cols; i++)
+                row[i-1] = rs.getObject(i);
+            model.addRow(row);
+        }
+        statement.close();
+
+        }catch(SQLException ex){
+            System.out.println("\n -- SQL Exception --- \n");
+            while(ex != null) {
+		System.out.println("Message: " + ex.getMessage());
+		ex = ex.getNextException();
+            }
+        }
+    }//GEN-LAST:event_showCustBtnActionPerformed
+
+    private void showEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showEmpBtnActionPerformed
+        try{
+        Statement statement=connection.createStatement();
+        String query="SELECT * FROM getEmployees()";
+        ResultSet rs = statement.executeQuery(query);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        DefaultTableModel model = (DefaultTableModel)employeesTable.getModel();
+        
+        //get columns
+        int cols = rsmd.getColumnCount();
+        String[] colName=new String[cols];
+        for(int i=0;i<cols;i++)
+            colName[i]=rsmd.getColumnName(i+1);
+        model.setColumnIdentifiers(colName);
+        
+        //populate rows
+        while(rs.next()){
+            Object[] row = new Object[cols];
+            for(int i=1; i<= cols; i++)
+                row[i-1] = rs.getObject(i);
+            model.addRow(row);
+        }
+        statement.close();
+
+        }catch(SQLException ex){
+            System.out.println("\n -- SQL Exception --- \n");
+            while(ex != null) {
+		System.out.println("Message: " + ex.getMessage());
+		ex = ex.getNextException();
+            }
+        }
+    }//GEN-LAST:event_showEmpBtnActionPerformed
+
+    private void showOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOrderBtnActionPerformed
+        try{
+        Statement statement=connection.createStatement();
+        String query="SELECT * FROM getOrders()";
+        ResultSet rs = statement.executeQuery(query);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        
+        //get columns
+        int cols = rsmd.getColumnCount();
+        String[] colName=new String[cols];
+        for(int i=0;i<cols;i++)
+            colName[i]=rsmd.getColumnName(i+1);
+        model.setColumnIdentifiers(colName);
+        
+        //populate rows
+        while(rs.next()){
+            Object[] row = new Object[cols];
+            for(int i=1; i<= cols; i++)
+                row[i-1] = rs.getObject(i);
+            model.addRow(row);
+        }
+        statement.close();
+
+        }catch(SQLException ex){
+            System.out.println("\n -- SQL Exception --- \n");
+            while(ex != null) {
+		System.out.println("Message: " + ex.getMessage());
+		ex = ex.getNextException();
+            }
+        }
+    }//GEN-LAST:event_showOrderBtnActionPerformed
+
+    private void showMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMenuBtnActionPerformed
+        try{
+        Statement statement=connection.createStatement();
+        String query="SELECT * FROM getMenuItems()";
+        ResultSet rs = statement.executeQuery(query);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        DefaultTableModel model = (DefaultTableModel) MenuTable.getModel();
+        
+        //get columns
+        int cols = rsmd.getColumnCount();
+        String[] colName=new String[cols];
+        for(int i=0;i<cols;i++)
+            colName[i]=rsmd.getColumnName(i+1);
+        model.setColumnIdentifiers(colName);
+        
+        //populate rows
+        while(rs.next()){
+            Object[] row = new Object[cols];
+            for(int i=1; i<= cols; i++)
+                row[i-1] = rs.getObject(i);
+            model.addRow(row);
+        }
+        statement.close();
+
+        }catch(SQLException ex){
+            System.out.println("\n -- SQL Exception --- \n");
+            while(ex != null) {
+		System.out.println("Message: " + ex.getMessage());
+		ex = ex.getNextException();
+            }
+        }
+    }//GEN-LAST:event_showMenuBtnActionPerformed
+
+    private void showResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showResBtnActionPerformed
+        try{
+        Statement statement=connection.createStatement();
+        String query="SELECT * FROM getReservations()";
+        ResultSet rs = statement.executeQuery(query);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        DefaultTableModel model = (DefaultTableModel) reservationTable.getModel();
+        
+        //get columns
+        int cols = rsmd.getColumnCount();
+        String[] colName=new String[cols];
+        for(int i=0;i<cols;i++)
+            colName[i]=rsmd.getColumnName(i+1);
+        model.setColumnIdentifiers(colName);
+        
+        //populate rows
+        while(rs.next()){
+            Object[] row = new Object[cols];
+            for(int i=1; i<= cols; i++)
+                row[i-1] = rs.getObject(i);
+            model.addRow(row);
+        }
+        statement.close();
+
+        }catch(SQLException ex){
+            System.out.println("\n -- SQL Exception --- \n");
+            while(ex != null) {
+		System.out.println("Message: " + ex.getMessage());
+		ex = ex.getNextException();
+            }
+        }
+    }//GEN-LAST:event_showResBtnActionPerformed
 
     void myConnection(){
         try{    
@@ -356,7 +507,6 @@ public class RestaurantGui extends javax.swing.JFrame {
     }
 
     
-    static String     driverClassName = "org.postgresql.Driver" ;
     static String     url = "jdbc:postgresql://dblabs.iee.ihu.gr:5432/it185185" ;
     static Connection connection = null;
     static String     username = "it185185";
@@ -369,7 +519,6 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JPanel customersPanel;
     private javax.swing.JScrollPane customersScroll;
     private javax.swing.JTable customersTable;
-    private javax.swing.JScrollPane employeeTable;
     private javax.swing.JPanel employeesPanel;
     private javax.swing.JScrollPane employeesScroll;
     private javax.swing.JTable employeesTable;

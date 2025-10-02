@@ -183,6 +183,122 @@ FOR EACH ROW EXECUTE PROCEDURE process_res_audit();
 
 --------------------------- CRUD Methods ---------------------------------
 
+----- Customers
+
+-- Create Customer
+CREATE OR REPLACE PROCEDURE add_customer(
+in_customer_name VARCHAR(255),
+in_phone VARCHAR(100),
+OUT out_new_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO customers(customer_name, phone) VALUES(in_customer_name,in_phone)
+  RETURNING customer_id INTO out_new_id;
+END; $$;
+
+-- Update Customer
+CREATE OR REPLACE PROCEDURE update_customer(
+in_customer_id INT,
+in_customer_name VARCHAR(255),
+in_phone VARCHAR(100)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  UPDATE customers SET(customer_name, phone) = (in_customer_name,in_phone)
+  WHERE customer_id = in_customer_id;
+END; $$;
+
+-- Delete Customer
+CREATE OR REPLACE PROCEDURE delete_customer(
+in_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM customers WHERE customer_id=in_id;
+END; $$;
+
+------ Orders
+
+-- Create Order
+CREATE OR REPLACE PROCEDURE create_order(
+  in_customer_id INT,
+  in_employee_id INT,
+  OUT out_order_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO orders(customer_id, employee_id)
+  VALUES(in_customer_id,in_employee_id)
+  RETURNING id INTO out_order_id;
+END; $$;
+
+-- Update Order Status
+CREATE OR REPLACE PROCEDURE update_order_status(
+in_order_id INT, in_status order_status_type)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  UPDATE orders SET status=in_status WHERE order_id=in_order_id;
+END; $$;
+
+-- Delete Order
+CREATE OR REPLACE PROCEDURE delete_order(
+in_order_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM orders WHERE id=in_order_id;
+END; $$;
+
+
+-- Add Order Item
+CREATE OR REPLACE PROCEDURE add_order_item(
+  in_order_id INT,
+  in_item_id INT,
+  in_qty INT,
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO orderItems(order_id,item_id,quantity)
+  VALUES(in_order_id,in_menuitem_id,in_qty);
+
+  UPDATE orders SET total = (
+  	SELECT sum(o.quantity*m.price) 
+	FROM orderItems o INNER JOIN menuItems m ON o.item_id = m.item_id
+  ) WHERE order_id = in_order_id;
+END; $$;
+
+
+-- Add Reservation
+CREATE OR REPLACE PROCEDURE add_reservation(
+  in_customer_id INT,
+  in_num_people INT,
+  OUT out_res_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO reservations(customer_id,num_people)
+  VALUES(in_customer_id,in_num_people)
+  RETURNING id INTO out_res_id;
+END; $$;
+
+
+-- Update Reservation Status
+CREATE OR REPLACE PROCEDURE update_reservation_status(
+in_reservation_id INT, in_status reservation_status_type)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  UPDATE reservations SET status=in_status WHERE reservation_id=in_reservation_id;
+END; $$;
+
+
+
 --------- SELECT ALL -----------------------
 CREATE OR REPLACE FUNCTION getCustomers() 
 RETURNS SETOF Customers AS $$
@@ -214,31 +330,6 @@ RETURNS SETOF Reservations AS $$
 SELECT * FROM Reservations;
 $$ LANGUAGE SQL;
 
------------ Specific Updates ---------------
-CREATE OR REPLACE FUNCTION serveOrder() 
-RETURNS Orders AS $$
-UPDATE Orders SET status = 'SERVED' WHERE order_id = $1;
-$$ LANGUAGE SQL;
-
-CREATE OR REPLACE FUNCTION cancelOrder(int) 
-RETURNS Orders AS $$
-UPDATE Orders SET status = 'CANCELLED' WHERE order_id = $1;
-$$ LANGUAGE SQL;
-
-CREATE OR REPLACE FUNCTION confirmReservation(int) 
-RETURNS Reservations AS $$
-UPDATE Reservations SET status = 'CONFIRMED' WHERE reservation_id = $1;
-$$ LANGUAGE SQL;
-
-CREATE OR REPLACE FUNCTION seatReservation(int) 
-RETURNS Reservations AS $$
-UPDATE Reservations SET status = 'SEATED' WHERE reservation_id = $1;
-$$ LANGUAGE SQL;
-
-CREATE OR REPLACE FUNCTION cancelReservation(int) 
-RETURNS Reservations AS $$
-UPDATE Reservations SET status = 'CANCELLED' WHERE reservation_id = $1;
-$$ LANGUAGE SQL;
 
 
 
@@ -275,4 +366,26 @@ INSERT INTO MenuItems(item_name, category, price) VALUES('Red Wine', 'Drink', 6)
 INSERT INTO MenuItems(item_name, category, price) VALUES('Beer', 'Drink', 5);
 INSERT INTO MenuItems(item_name, category, price) VALUES('Soda', 'Drink', 3);
 
+INSERT INTO Orders (customer_id, employee_id) values (13, 7);
+INSERT INTO Orders (customer_id, employee_id) values (14, 8);
+INSERT INTO Orders (customer_id, employee_id) values (15, 7);
+INSERT INTO Orders (customer_id, employee_id) values (16, 8);
+INSERT INTO Orders (customer_id, employee_id) values (17, 7);
+INSERT INTO Orders (customer_id, employee_id) values (18, 8);
+INSERT INTO Orders (customer_id, employee_id) values (19, 7);
 
+INSERT INTO Reservations (customer_id, num_people) values (13, 4);
+INSERT INTO Reservations (customer_id, num_people) values (14, 4);
+INSERT INTO Reservations (customer_id, num_people) values (15, 3);
+INSERT INTO Reservations (customer_id, num_people) values (16, 2);
+INSERT INTO Reservations (customer_id, num_people) values (17, 5);
+INSERT INTO Reservations (customer_id, num_people) values (18, 3);
+INSERT INTO Reservations (customer_id, num_people) values (19, 2);
+
+
+
+
+-------------------------- SELECT IDEAS -----------------------
+
+---- Show Specific Order Items ---------
+select m.item_name Items, quantity Quantity from menuItems m INNER JOIN orderItems o ON m.item_id = o.item_id;
