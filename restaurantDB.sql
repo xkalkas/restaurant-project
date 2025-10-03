@@ -219,6 +219,43 @@ BEGIN
   DELETE FROM customers WHERE customer_id=in_id;
 END; $$;
 
+---- Customers
+
+-- Create Customer
+CREATE OR REPLACE PROCEDURE add_employee(
+in_emp_name VARCHAR(255),
+in_emp_role role_type,
+OUT out_new_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO employees(emp_name, emp_role) VALUES(in_emp_name,in_emp_role)
+  RETURNING employee_id INTO out_new_id;
+END; $$;
+
+-- Update Customer
+CREATE OR REPLACE PROCEDURE update_employee(
+in_employee_id INT,
+in_emp_name VARCHAR(255),
+in_emp_role role_type
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  UPDATE employees SET(emp_name, emp_role) = (in_emp_name,in_emp_role)
+  WHERE employee_id = in_employee_id;
+END; $$;
+
+-- Delete Customer
+CREATE OR REPLACE PROCEDURE delete_employee(
+in_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM employees WHERE employee_id=in_id;
+END; $$;
+
+
 ------ Orders
 
 -- Create Order
@@ -258,7 +295,7 @@ END; $$;
 CREATE OR REPLACE PROCEDURE add_order_item(
   in_order_id INT,
   in_item_id INT,
-  in_qty INT,
+  in_qty INT
 )
 LANGUAGE plpgsql
 AS $$
@@ -297,6 +334,42 @@ BEGIN
   UPDATE reservations SET status=in_status WHERE reservation_id=in_reservation_id;
 END; $$;
 
+
+-- Add Menu Items
+CREATE OR REPLACE PROCEDURE add_menuitem(
+  in_name VARCHAR,
+  in_category category_type,
+  in_price INT,
+  OUT out_new_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO menuitems(item_name,category,price) VALUES(in_name,in_category,in_price)
+  RETURNING item_id INTO out_new_id;
+END; $$;
+
+-- Update Menu Item
+CREATE OR REPLACE PROCEDURE update_menuitem(
+  in_id INT,
+  in_name VARCHAR,
+  in_category category_type,
+  in_price NUMERIC
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  UPDATE menuitems SET item_name=in_name, category=in_category, price=in_price WHERE item_id=in_id;
+END; $$;
+
+-- Delete Menu Item
+CREATE OR REPLACE PROCEDURE delete_menuitem(
+in_id INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM menuitems WHERE item_id=in_id;
+END; $$;
 
 
 --------- SELECT ALL -----------------------
