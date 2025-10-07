@@ -1,11 +1,9 @@
 package com.mycompany.mavenproject1;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author Xkalk
- */
+
 public class RestaurantGui extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RestaurantGui.class.getName());
@@ -15,7 +13,6 @@ public class RestaurantGui extends javax.swing.JFrame {
      */
     public RestaurantGui() {
         initComponents();
-        myConnection();
     }
 
     /**
@@ -27,62 +24,34 @@ public class RestaurantGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        connectPanel = new javax.swing.JPanel();
-        logoutBtn = new javax.swing.JButton();
-        connectivityText = new javax.swing.JLabel();
         menuTabPane = new javax.swing.JTabbedPane();
         customersPanel = new javax.swing.JPanel();
         customersScroll = new javax.swing.JScrollPane();
         customersTable = new javax.swing.JTable();
         showCustBtn = new javax.swing.JButton();
+        clearCustBtn = new javax.swing.JButton();
         employeesPanel = new javax.swing.JPanel();
         employeesScroll = new javax.swing.JScrollPane();
         employeesTable = new javax.swing.JTable();
         showEmpBtn = new javax.swing.JButton();
+        clearEmpBtn = new javax.swing.JButton();
         orderPanel = new javax.swing.JPanel();
         orderScroll = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
         showOrderBtn = new javax.swing.JButton();
+        clearOrdBtn = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         menuScroll = new javax.swing.JScrollPane();
-        MenuTable = new javax.swing.JTable();
+        menuTable = new javax.swing.JTable();
         showMenuBtn = new javax.swing.JButton();
+        clearMenuBtn = new javax.swing.JButton();
         reservationPanel = new javax.swing.JPanel();
         reservationScroll = new javax.swing.JScrollPane();
         reservationTable = new javax.swing.JTable();
         showResBtn = new javax.swing.JButton();
+        clearResBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        logoutBtn.setText("Logout");
-        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutBtnActionPerformed(evt);
-            }
-        });
-
-        connectivityText.setText("Pending...");
-
-        javax.swing.GroupLayout connectPanelLayout = new javax.swing.GroupLayout(connectPanel);
-        connectPanel.setLayout(connectPanelLayout);
-        connectPanelLayout.setHorizontalGroup(
-            connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, connectPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(connectivityText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(logoutBtn)
-                .addContainerGap())
-        );
-        connectPanelLayout.setVerticalGroup(
-            connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(connectPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(logoutBtn)
-                    .addComponent(connectivityText))
-                .addContainerGap(126, Short.MAX_VALUE))
-        );
 
         customersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,13 +70,22 @@ public class RestaurantGui extends javax.swing.JFrame {
             }
         });
 
+        clearCustBtn.setText("Clear");
+        clearCustBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearCustBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout customersPanelLayout = new javax.swing.GroupLayout(customersPanel);
         customersPanel.setLayout(customersPanelLayout);
         customersPanelLayout.setHorizontalGroup(
             customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(showCustBtn)
+                .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(showCustBtn)
+                    .addComponent(clearCustBtn))
                 .addGap(18, 18, 18)
                 .addComponent(customersScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
                 .addContainerGap())
@@ -117,9 +95,12 @@ public class RestaurantGui extends javax.swing.JFrame {
             .addGroup(customersPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showCustBtn)
+                    .addGroup(customersPanelLayout.createSequentialGroup()
+                        .addComponent(showCustBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearCustBtn))
                     .addComponent(customersScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Customers", customersPanel);
@@ -141,13 +122,22 @@ public class RestaurantGui extends javax.swing.JFrame {
             }
         });
 
+        clearEmpBtn.setText("Clear");
+        clearEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearEmpBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout employeesPanelLayout = new javax.swing.GroupLayout(employeesPanel);
         employeesPanel.setLayout(employeesPanelLayout);
         employeesPanelLayout.setHorizontalGroup(
             employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(showEmpBtn)
+                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(showEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clearEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(employeesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
                 .addContainerGap())
@@ -157,9 +147,12 @@ public class RestaurantGui extends javax.swing.JFrame {
             .addGroup(employeesPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showEmpBtn)
+                    .addGroup(employeesPanelLayout.createSequentialGroup()
+                        .addComponent(showEmpBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearEmpBtn))
                     .addComponent(employeesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Employees", employeesPanel);
@@ -173,13 +166,22 @@ public class RestaurantGui extends javax.swing.JFrame {
             }
         });
 
+        clearOrdBtn.setText("Clear");
+        clearOrdBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearOrdBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
         orderPanelLayout.setHorizontalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(showOrderBtn)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(showOrderBtn)
+                    .addComponent(clearOrdBtn))
                 .addGap(18, 18, 18)
                 .addComponent(orderScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
                 .addContainerGap())
@@ -189,19 +191,29 @@ public class RestaurantGui extends javax.swing.JFrame {
             .addGroup(orderPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showOrderBtn)
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addComponent(showOrderBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearOrdBtn))
                     .addComponent(orderScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Orders", orderPanel);
 
-        menuScroll.setViewportView(MenuTable);
+        menuScroll.setViewportView(menuTable);
 
         showMenuBtn.setText("Show");
         showMenuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showMenuBtnActionPerformed(evt);
+            }
+        });
+
+        clearMenuBtn.setText("Clear");
+        clearMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearMenuBtnActionPerformed(evt);
             }
         });
 
@@ -211,7 +223,9 @@ public class RestaurantGui extends javax.swing.JFrame {
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(showMenuBtn)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(showMenuBtn)
+                    .addComponent(clearMenuBtn))
                 .addGap(18, 18, 18)
                 .addComponent(menuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
                 .addContainerGap())
@@ -221,9 +235,12 @@ public class RestaurantGui extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showMenuBtn)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addComponent(showMenuBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearMenuBtn))
                     .addComponent(menuScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Menu", menuPanel);
@@ -237,25 +254,37 @@ public class RestaurantGui extends javax.swing.JFrame {
             }
         });
 
+        clearResBtn.setText("Clear");
+        clearResBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearResBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout reservationPanelLayout = new javax.swing.GroupLayout(reservationPanel);
         reservationPanel.setLayout(reservationPanelLayout);
         reservationPanelLayout.setHorizontalGroup(
             reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reservationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(showResBtn)
-                .addGap(18, 18, 18)
+                .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(showResBtn)
+                    .addComponent(clearResBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(reservationScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
         reservationPanelLayout.setVerticalGroup(
             reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reservationPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showResBtn)
+                    .addGroup(reservationPanelLayout.createSequentialGroup()
+                        .addComponent(showResBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearResBtn))
                     .addComponent(reservationScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Reservations", reservationPanel);
@@ -264,71 +293,19 @@ public class RestaurantGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(menuTabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(connectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(menuTabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(connectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(menuTabPane)
-                .addContainerGap())
+            .addComponent(menuTabPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        try{
-            connection.close();
-            if (connection != null && connection.isClosed()) {
-                connectivityText.setText("Disconnected");
-            }
-        }catch(SQLException ex){
-            System.out.println("\n -- SQL Exception --- \n");
-            while(ex != null) {
-		System.out.println("Message: " + ex.getMessage());
-		ex = ex.getNextException();
-            }
-        }
-        
-    }//GEN-LAST:event_logoutBtnActionPerformed
-
     private void showCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCustBtnActionPerformed
-        try{
-        Statement statement=connection.createStatement();
-        String query=PropertyLoader.get("get.customers");
-        ResultSet rs = statement.executeQuery(query);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
-        
-        //get columns
-        int cols = rsmd.getColumnCount();
-        String[] colName=new String[cols];
-        for(int i=0;i<cols;i++)
-            colName[i]=rsmd.getColumnName(i+1);
-        model.setColumnIdentifiers(colName);
-        
-        //populate rows
-        while(rs.next()){
-            Object[] row = new Object[cols];
-            for(int i=1; i<= cols; i++)
-                row[i-1] = rs.getObject(i);
-            model.addRow(row);
-        }
-        statement.close();
-
-        }catch(SQLException ex){
-            System.out.println("\n -- SQL Exception --- \n");
-            while(ex != null) {
-		System.out.println("Message: " + ex.getMessage());
-		ex = ex.getNextException();
-            }
-        }
+        CustomerDao dao = new CustomerDao();
+        customersTable.setModel(dao.getAllCustomers());
     }//GEN-LAST:event_showCustBtnActionPerformed
 
     private void showEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showEmpBtnActionPerformed
@@ -403,7 +380,7 @@ public class RestaurantGui extends javax.swing.JFrame {
         String query=PropertyLoader.get("get.menuItems");
         ResultSet rs = statement.executeQuery(query);
         ResultSetMetaData rsmd = rs.getMetaData();
-        DefaultTableModel model = (DefaultTableModel) MenuTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) menuTable.getModel();
         
         //get columns
         int cols = rsmd.getColumnCount();
@@ -463,21 +440,25 @@ public class RestaurantGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_showResBtnActionPerformed
 
-    void myConnection(){
-        try{    
-            connection = DriverManager.getConnection(url, username, password);
-            if (connection != null && !connection.isClosed()) {
-                connectivityText.setText("Connected");
-            }
-        }catch(SQLException ex){
-            System.out.println("\n -- SQL Exception --- \n");
-            while(ex != null) {
-		System.out.println("Message: " + ex.getMessage());
-		ex = ex.getNextException();
-            }
-        }
-        
-    }
+    private void clearCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCustBtnActionPerformed
+        customersTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearCustBtnActionPerformed
+
+    private void clearEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearEmpBtnActionPerformed
+        employeesTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearEmpBtnActionPerformed
+
+    private void clearOrdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOrdBtnActionPerformed
+        orderTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearOrdBtnActionPerformed
+
+    private void clearMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearMenuBtnActionPerformed
+        menuTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearMenuBtnActionPerformed
+
+    private void clearResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearResBtnActionPerformed
+        reservationTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearResBtnActionPerformed
     
     /**
      * @param args the command line arguments
@@ -501,31 +482,41 @@ public class RestaurantGui extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        try{
+            DatabaseManager.connect();
+        }catch(SQLException ex){
+            System.out.println("\n -- SQL Exception --- \n");
+            while(ex != null) {
+		System.out.println("Message: " + ex.getMessage());
+		ex = ex.getNextException();
+            }
+        }
+        FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(() -> new RestaurantGui().setVisible(true));
         
         
     }
 
     
-    static String     url = PropertyLoader.get("db.url") ;
     static Connection connection = null;
-    static String     username = PropertyLoader.get("db.user");
-    static String     password = PropertyLoader.get("db.password");
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable MenuTable;
-    private javax.swing.JPanel connectPanel;
-    private javax.swing.JLabel connectivityText;
+    private javax.swing.JButton clearCustBtn;
+    private javax.swing.JButton clearEmpBtn;
+    private javax.swing.JButton clearMenuBtn;
+    private javax.swing.JButton clearOrdBtn;
+    private javax.swing.JButton clearResBtn;
     private javax.swing.JPanel customersPanel;
     private javax.swing.JScrollPane customersScroll;
     private javax.swing.JTable customersTable;
     private javax.swing.JPanel employeesPanel;
     private javax.swing.JScrollPane employeesScroll;
     private javax.swing.JTable employeesTable;
-    private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JScrollPane menuScroll;
     private javax.swing.JTabbedPane menuTabPane;
+    private javax.swing.JTable menuTable;
     private javax.swing.JPanel orderPanel;
     private javax.swing.JScrollPane orderScroll;
     private javax.swing.JTable orderTable;
