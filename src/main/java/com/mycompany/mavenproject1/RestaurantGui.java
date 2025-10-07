@@ -301,7 +301,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private void showCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCustBtnActionPerformed
         try{
         Statement statement=connection.createStatement();
-        String query="SELECT * FROM getCustomers()";
+        String query=PropertyLoader.get("get.customers");
         ResultSet rs = statement.executeQuery(query);
         ResultSetMetaData rsmd = rs.getMetaData();
         DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
@@ -334,7 +334,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private void showEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showEmpBtnActionPerformed
         try{
         Statement statement=connection.createStatement();
-        String query="SELECT * FROM getEmployees()";
+        String query=PropertyLoader.get("get.employees");
         ResultSet rs = statement.executeQuery(query);
         ResultSetMetaData rsmd = rs.getMetaData();
         DefaultTableModel model = (DefaultTableModel)employeesTable.getModel();
@@ -367,7 +367,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private void showOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOrderBtnActionPerformed
         try{
         Statement statement=connection.createStatement();
-        String query="SELECT * FROM getOrders()";
+        String query=PropertyLoader.get("get.orders");
         ResultSet rs = statement.executeQuery(query);
         ResultSetMetaData rsmd = rs.getMetaData();
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
@@ -400,7 +400,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private void showMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMenuBtnActionPerformed
         try{
         Statement statement=connection.createStatement();
-        String query="SELECT * FROM getMenuItems()";
+        String query=PropertyLoader.get("get.menuItems");
         ResultSet rs = statement.executeQuery(query);
         ResultSetMetaData rsmd = rs.getMetaData();
         DefaultTableModel model = (DefaultTableModel) MenuTable.getModel();
@@ -433,7 +433,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private void showResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showResBtnActionPerformed
         try{
         Statement statement=connection.createStatement();
-        String query="SELECT * FROM getReservations()";
+        String query=PropertyLoader.get("get.reservations");
         ResultSet rs = statement.executeQuery(query);
         ResultSetMetaData rsmd = rs.getMetaData();
         DefaultTableModel model = (DefaultTableModel) reservationTable.getModel();
@@ -507,10 +507,10 @@ public class RestaurantGui extends javax.swing.JFrame {
     }
 
     
-    static String     url = "jdbc:postgresql://dblabs.iee.ihu.gr:5432/it185185" ;
+    static String     url = PropertyLoader.get("db.url") ;
     static Connection connection = null;
-    static String     username = "it185185";
-    static String     password = "123098xk";
+    static String     username = PropertyLoader.get("db.user");
+    static String     password = PropertyLoader.get("db.password");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable MenuTable;

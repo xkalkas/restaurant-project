@@ -403,6 +403,11 @@ RETURNS SETOF Reservations AS $$
 SELECT * FROM Reservations;
 $$ LANGUAGE SQL;
 
+CREATE OR REPLACE FUNCTION getAuditLog() 
+RETURNS SETOF AuditLog AS $$
+SELECT * FROM AuditLog 
+ORDER BY change_time DESC;
+$$ LANGUAGE SQL;
 
 
 
