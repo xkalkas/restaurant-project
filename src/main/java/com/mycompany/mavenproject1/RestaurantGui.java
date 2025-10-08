@@ -305,139 +305,27 @@ public class RestaurantGui extends javax.swing.JFrame {
 
     private void showCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCustBtnActionPerformed
         CustomerDao dao = new CustomerDao();
-        customersTable.setModel(dao.getAllCustomers());
+        customersTable.setModel(dao.getAllCustomers(connection));
     }//GEN-LAST:event_showCustBtnActionPerformed
 
     private void showEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showEmpBtnActionPerformed
-        try{
-        Statement statement=connection.createStatement();
-        String query=PropertyLoader.get("get.employees");
-        ResultSet rs = statement.executeQuery(query);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        DefaultTableModel model = (DefaultTableModel)employeesTable.getModel();
-        
-        //get columns
-        int cols = rsmd.getColumnCount();
-        String[] colName=new String[cols];
-        for(int i=0;i<cols;i++)
-            colName[i]=rsmd.getColumnName(i+1);
-        model.setColumnIdentifiers(colName);
-        
-        //populate rows
-        while(rs.next()){
-            Object[] row = new Object[cols];
-            for(int i=1; i<= cols; i++)
-                row[i-1] = rs.getObject(i);
-            model.addRow(row);
-        }
-        statement.close();
-
-        }catch(SQLException ex){
-            System.out.println("\n -- SQL Exception --- \n");
-            while(ex != null) {
-		System.out.println("Message: " + ex.getMessage());
-		ex = ex.getNextException();
-            }
-        }
+        EmployeeDao dao = new EmployeeDao();
+        employeesTable.setModel(dao.getAllEmployees(connection));
     }//GEN-LAST:event_showEmpBtnActionPerformed
 
     private void showOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOrderBtnActionPerformed
-        try{
-        Statement statement=connection.createStatement();
-        String query=PropertyLoader.get("get.orders");
-        ResultSet rs = statement.executeQuery(query);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
-        
-        //get columns
-        int cols = rsmd.getColumnCount();
-        String[] colName=new String[cols];
-        for(int i=0;i<cols;i++)
-            colName[i]=rsmd.getColumnName(i+1);
-        model.setColumnIdentifiers(colName);
-        
-        //populate rows
-        while(rs.next()){
-            Object[] row = new Object[cols];
-            for(int i=1; i<= cols; i++)
-                row[i-1] = rs.getObject(i);
-            model.addRow(row);
-        }
-        statement.close();
-
-        }catch(SQLException ex){
-            System.out.println("\n -- SQL Exception --- \n");
-            while(ex != null) {
-		System.out.println("Message: " + ex.getMessage());
-		ex = ex.getNextException();
-            }
-        }
+        OrderDao dao = new OrderDao();
+        orderTable.setModel(dao.getAllOrders(connection));
     }//GEN-LAST:event_showOrderBtnActionPerformed
 
     private void showMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMenuBtnActionPerformed
-        try{
-        Statement statement=connection.createStatement();
-        String query=PropertyLoader.get("get.menuItems");
-        ResultSet rs = statement.executeQuery(query);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        DefaultTableModel model = (DefaultTableModel) menuTable.getModel();
-        
-        //get columns
-        int cols = rsmd.getColumnCount();
-        String[] colName=new String[cols];
-        for(int i=0;i<cols;i++)
-            colName[i]=rsmd.getColumnName(i+1);
-        model.setColumnIdentifiers(colName);
-        
-        //populate rows
-        while(rs.next()){
-            Object[] row = new Object[cols];
-            for(int i=1; i<= cols; i++)
-                row[i-1] = rs.getObject(i);
-            model.addRow(row);
-        }
-        statement.close();
-
-        }catch(SQLException ex){
-            System.out.println("\n -- SQL Exception --- \n");
-            while(ex != null) {
-		System.out.println("Message: " + ex.getMessage());
-		ex = ex.getNextException();
-            }
-        }
+        MenuDao dao = new MenuDao();
+        menuTable.setModel(dao.getAllMenuItems(connection));
     }//GEN-LAST:event_showMenuBtnActionPerformed
 
     private void showResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showResBtnActionPerformed
-        try{
-        Statement statement=connection.createStatement();
-        String query=PropertyLoader.get("get.reservations");
-        ResultSet rs = statement.executeQuery(query);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        DefaultTableModel model = (DefaultTableModel) reservationTable.getModel();
-        
-        //get columns
-        int cols = rsmd.getColumnCount();
-        String[] colName=new String[cols];
-        for(int i=0;i<cols;i++)
-            colName[i]=rsmd.getColumnName(i+1);
-        model.setColumnIdentifiers(colName);
-        
-        //populate rows
-        while(rs.next()){
-            Object[] row = new Object[cols];
-            for(int i=1; i<= cols; i++)
-                row[i-1] = rs.getObject(i);
-            model.addRow(row);
-        }
-        statement.close();
-
-        }catch(SQLException ex){
-            System.out.println("\n -- SQL Exception --- \n");
-            while(ex != null) {
-		System.out.println("Message: " + ex.getMessage());
-		ex = ex.getNextException();
-            }
-        }
+        ReservationDao dao = new ReservationDao();
+        reservationTable.setModel(dao.getAllReservations(connection));
     }//GEN-LAST:event_showResBtnActionPerformed
 
     private void clearCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCustBtnActionPerformed
@@ -484,6 +372,7 @@ public class RestaurantGui extends javax.swing.JFrame {
         /* Create and display the form */
         try{
             DatabaseManager.connect();
+            connection = DatabaseManager.getConnection();
         }catch(SQLException ex){
             System.out.println("\n -- SQL Exception --- \n");
             while(ex != null) {
@@ -497,9 +386,7 @@ public class RestaurantGui extends javax.swing.JFrame {
         
     }
 
-    
     static Connection connection = null;
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearCustBtn;
