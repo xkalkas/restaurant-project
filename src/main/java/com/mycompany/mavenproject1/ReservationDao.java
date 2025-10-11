@@ -16,9 +16,15 @@ import javax.swing.table.DefaultTableModel;
  * @author Xkalk
  */
 public class ReservationDao {
+    
     public DefaultTableModel getAllReservations(Connection connection){
         String query = PropertyLoader.get("get.reservations");
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override 
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         
         try (Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);){ 

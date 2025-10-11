@@ -16,9 +16,15 @@ import javax.swing.table.DefaultTableModel;
  * @author Xkalk
  */
 public class MenuDao {
+    
     public DefaultTableModel getAllMenuItems(Connection connection){
         String query = PropertyLoader.get("get.menuItems");
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override 
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         
         try (Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);){ 
