@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.sql.*;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,14 +33,7 @@ public class RestaurantGui extends javax.swing.JFrame {
         resultsFrame = new javax.swing.JFrame();
         resultScroll = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
         menuTabPane = new javax.swing.JTabbedPane();
-        queryPanel = new javax.swing.JPanel();
-        querySelector = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         customersPanel = new javax.swing.JPanel();
         customersScroll = new javax.swing.JScrollPane();
         customersTable = new javax.swing.JTable();
@@ -59,6 +53,11 @@ public class RestaurantGui extends javax.swing.JFrame {
         clearEmpBtn = new javax.swing.JButton();
         updateEmpBtn = new javax.swing.JButton();
         addEmpBtn = new javax.swing.JButton();
+        deleteEmpBtn = new javax.swing.JButton();
+        empNameField = new javax.swing.JTextField();
+        empRoleField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         orderPanel = new javax.swing.JPanel();
         orderScroll = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
@@ -66,6 +65,9 @@ public class RestaurantGui extends javax.swing.JFrame {
         clearOrdBtn = new javax.swing.JButton();
         addOrderBtn = new javax.swing.JButton();
         updateOrderBtn = new javax.swing.JButton();
+        deleteOrderBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        orderStatusCombo = new javax.swing.JComboBox<>();
         menuPanel = new javax.swing.JPanel();
         menuScroll = new javax.swing.JScrollPane();
         menuTable = new javax.swing.JTable();
@@ -73,6 +75,13 @@ public class RestaurantGui extends javax.swing.JFrame {
         clearMenuBtn = new javax.swing.JButton();
         updateMenuBtn = new javax.swing.JButton();
         addMenuBtn = new javax.swing.JButton();
+        deleteMenuBtn = new javax.swing.JButton();
+        menuNameField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        menuCategoryField = new javax.swing.JTextField();
+        menuPriceField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         reservationPanel = new javax.swing.JPanel();
         reservationScroll = new javax.swing.JScrollPane();
         reservationTable = new javax.swing.JTable();
@@ -80,6 +89,9 @@ public class RestaurantGui extends javax.swing.JFrame {
         clearResBtn = new javax.swing.JButton();
         updateResBtn = new javax.swing.JButton();
         addResBtn = new javax.swing.JButton();
+        deleteResBtn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        resStatusCombo = new javax.swing.JComboBox<>();
 
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,59 +124,7 @@ public class RestaurantGui extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        querySelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton1.setText("Show");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout queryPanelLayout = new javax.swing.GroupLayout(queryPanel);
-        queryPanel.setLayout(queryPanelLayout);
-        queryPanelLayout.setHorizontalGroup(
-            queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(queryPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addContainerGap(535, Short.MAX_VALUE))
-                    .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addComponent(querySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 613, Short.MAX_VALUE))))
-        );
-        queryPanelLayout.setVerticalGroup(
-            queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(queryPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(querySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(495, Short.MAX_VALUE))
-        );
-
-        menuTabPane.addTab("Queries", queryPanel);
 
         customersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,6 +134,11 @@ public class RestaurantGui extends javax.swing.JFrame {
 
             }
         ));
+        customersTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customersTableMouseClicked(evt);
+            }
+        });
         customersScroll.setViewportView(customersTable);
 
         showCustBtn.setText("Show");
@@ -191,6 +156,11 @@ public class RestaurantGui extends javax.swing.JFrame {
         });
 
         updateCustBtn.setText("Update");
+        updateCustBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateCustBtnActionPerformed(evt);
+            }
+        });
 
         addCustBtn.setText("Add");
         addCustBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +174,11 @@ public class RestaurantGui extends javax.swing.JFrame {
         jLabel2.setText("Phone");
 
         deleteCustBtn.setText("Delete");
+        deleteCustBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCustBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout customersPanelLayout = new javax.swing.GroupLayout(customersPanel);
         customersPanel.setLayout(customersPanelLayout);
@@ -232,7 +207,7 @@ public class RestaurantGui extends javax.swing.JFrame {
                                 .addComponent(updateCustBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(deleteCustBtn))))
-                    .addComponent(customersScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
+                    .addComponent(customersScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
         customersPanelLayout.setVerticalGroup(
@@ -252,15 +227,14 @@ public class RestaurantGui extends javax.swing.JFrame {
                         .addGroup(customersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addCustBtn)
                             .addComponent(updateCustBtn)
-                            .addComponent(deleteCustBtn))
-                        .addGap(8, 8, 8))
+                            .addComponent(deleteCustBtn)))
                     .addGroup(customersPanelLayout.createSequentialGroup()
                         .addComponent(showCustBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(clearCustBtn)))
                 .addGap(18, 18, 18)
                 .addComponent(customersScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Customers", customersPanel);
@@ -293,38 +267,65 @@ public class RestaurantGui extends javax.swing.JFrame {
 
         addEmpBtn.setText("Add");
 
+        deleteEmpBtn.setText("Delete");
+
+        jLabel3.setText("Name");
+
+        jLabel4.setText("Role");
+
         javax.swing.GroupLayout employeesPanelLayout = new javax.swing.GroupLayout(employeesPanel);
         employeesPanel.setLayout(employeesPanelLayout);
         employeesPanelLayout.setHorizontalGroup(
             employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeesPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(showEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(clearEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(addEmpBtn)
-                        .addComponent(updateEmpBtn)))
-                .addGap(18, 18, 18)
-                .addComponent(employeesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                    .addComponent(employeesScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                    .addGroup(employeesPanelLayout.createSequentialGroup()
+                        .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(showEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clearEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeesPanelLayout.createSequentialGroup()
+                                .addComponent(addEmpBtn)
+                                .addGap(12, 12, 12)
+                                .addComponent(updateEmpBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteEmpBtn))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employeesPanelLayout.createSequentialGroup()
+                                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(empNameField)
+                                    .addComponent(empRoleField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(12, 12, 12))
         );
         employeesPanelLayout.setVerticalGroup(
             employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(employeesPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(15, 15, 15)
+                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(showEmpBtn)
                     .addGroup(employeesPanelLayout.createSequentialGroup()
-                        .addComponent(showEmpBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clearEmpBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addEmpBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(updateEmpBtn))
-                    .addComponent(employeesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                        .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(empNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(empRoleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addEmpBtn)
+                    .addComponent(updateEmpBtn)
+                    .addComponent(deleteEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clearEmpBtn))
+                .addGap(18, 18, 18)
+                .addComponent(employeesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Employees", employeesPanel);
@@ -354,37 +355,59 @@ public class RestaurantGui extends javax.swing.JFrame {
 
         updateOrderBtn.setText("Update");
 
+        deleteOrderBtn.setText("Delete");
+
+        jLabel5.setText("Status");
+
+        orderStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
         orderPanelLayout.setHorizontalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(orderPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(showOrderBtn)
-                        .addComponent(clearOrdBtn))
-                    .addComponent(addOrderBtn)
-                    .addComponent(updateOrderBtn))
-                .addGap(18, 18, 18)
-                .addComponent(orderScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                    .addComponent(orderScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(showOrderBtn)
+                            .addComponent(clearOrdBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(orderPanelLayout.createSequentialGroup()
+                                .addComponent(addOrderBtn)
+                                .addGap(15, 15, 15)
+                                .addComponent(updateOrderBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(orderPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(orderStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(12, 12, 12))
         );
         orderPanelLayout.setVerticalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(orderPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(15, 15, 15)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(orderPanelLayout.createSequentialGroup()
                         .addComponent(showOrderBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clearOrdBtn)
+                        .addComponent(clearOrdBtn))
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(orderStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addOrderBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(updateOrderBtn))
-                    .addComponent(orderScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(deleteOrderBtn)
+                            .addComponent(updateOrderBtn)
+                            .addComponent(addOrderBtn))))
+                .addGap(18, 18, 18)
+                .addComponent(orderScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Orders", orderPanel);
@@ -409,37 +432,77 @@ public class RestaurantGui extends javax.swing.JFrame {
 
         addMenuBtn.setText("Add");
 
+        deleteMenuBtn.setText("Delete");
+
+        jLabel6.setText("Name");
+
+        jLabel7.setText("Category");
+
+        jLabel8.setText("Price");
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(showMenuBtn)
-                        .addComponent(clearMenuBtn))
-                    .addComponent(addMenuBtn)
-                    .addComponent(updateMenuBtn))
-                .addGap(18, 18, 18)
-                .addComponent(menuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(showMenuBtn)
+                            .addComponent(clearMenuBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                                .addComponent(addMenuBtn)
+                                .addGap(15, 15, 15)
+                                .addComponent(updateMenuBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteMenuBtn))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(menuNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(menuCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(menuPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(menuScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(15, 15, 15)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(menuNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(menuCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(menuPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(deleteMenuBtn)
+                            .addComponent(updateMenuBtn)
+                            .addComponent(addMenuBtn)))
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addComponent(showMenuBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clearMenuBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addMenuBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(updateMenuBtn))
-                    .addComponent(menuScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                        .addComponent(clearMenuBtn)))
+                .addGap(18, 18, 18)
+                .addComponent(menuScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Menu", menuPanel);
@@ -464,37 +527,56 @@ public class RestaurantGui extends javax.swing.JFrame {
 
         addResBtn.setText("Add");
 
+        deleteResBtn.setText("Delete");
+
+        jLabel9.setText("Status");
+
+        resStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout reservationPanelLayout = new javax.swing.GroupLayout(reservationPanel);
         reservationPanel.setLayout(reservationPanelLayout);
         reservationPanelLayout.setHorizontalGroup(
             reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reservationPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(reservationPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(showResBtn)
-                        .addComponent(clearResBtn))
-                    .addComponent(addResBtn)
-                    .addComponent(updateResBtn))
-                .addGap(18, 18, 18)
-                .addComponent(reservationScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                    .addGroup(reservationPanelLayout.createSequentialGroup()
+                        .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(showResBtn)
+                            .addComponent(clearResBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reservationPanelLayout.createSequentialGroup()
+                                .addComponent(addResBtn)
+                                .addGap(15, 15, 15)
+                                .addComponent(updateResBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteResBtn))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reservationPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(resStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(reservationScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
         reservationPanelLayout.setVerticalGroup(
             reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reservationPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showResBtn)
+                    .addComponent(jLabel9)
+                    .addComponent(resStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clearResBtn)
+                    .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(updateResBtn)
+                        .addComponent(deleteResBtn)
+                        .addComponent(addResBtn)))
                 .addGap(18, 18, 18)
-                .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(reservationPanelLayout.createSequentialGroup()
-                        .addComponent(showResBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clearResBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addResBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(updateResBtn))
-                    .addComponent(reservationScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addComponent(reservationScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Reservations", reservationPanel);
@@ -503,7 +585,10 @@ public class RestaurantGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuTabPane)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuTabPane)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,53 +598,29 @@ public class RestaurantGui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void showCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCustBtnActionPerformed
-        customersTable.setModel(cDao.getAllCustomers(connection));
-    }//GEN-LAST:event_showCustBtnActionPerformed
-
-    private void showEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showEmpBtnActionPerformed
-        employeesTable.setModel(eDao.getAllEmployees(connection));
-    }//GEN-LAST:event_showEmpBtnActionPerformed
-
-    private void showOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOrderBtnActionPerformed
-        orderTable.setModel(oDao.getAllOrders(connection));
-    }//GEN-LAST:event_showOrderBtnActionPerformed
-
-    private void showMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMenuBtnActionPerformed
-        menuTable.setModel(mDao.getAllMenuItems(connection));
-    }//GEN-LAST:event_showMenuBtnActionPerformed
+    private void clearResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearResBtnActionPerformed
+        reservationTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearResBtnActionPerformed
 
     private void showResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showResBtnActionPerformed
         reservationTable.setModel(rDao.getAllReservations(connection));
     }//GEN-LAST:event_showResBtnActionPerformed
 
-    private void clearCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCustBtnActionPerformed
-        customersTable.setModel(new DefaultTableModel());
-    }//GEN-LAST:event_clearCustBtnActionPerformed
+    private void clearMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearMenuBtnActionPerformed
+        menuTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearMenuBtnActionPerformed
 
-    private void clearEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearEmpBtnActionPerformed
-        employeesTable.setModel(new DefaultTableModel());
-    }//GEN-LAST:event_clearEmpBtnActionPerformed
+    private void showMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMenuBtnActionPerformed
+        menuTable.setModel(mDao.getAllMenuItems(connection));
+    }//GEN-LAST:event_showMenuBtnActionPerformed
 
     private void clearOrdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOrdBtnActionPerformed
         orderTable.setModel(new DefaultTableModel());
     }//GEN-LAST:event_clearOrdBtnActionPerformed
 
-    private void clearMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearMenuBtnActionPerformed
-        menuTable.setModel(new DefaultTableModel());
-    }//GEN-LAST:event_clearMenuBtnActionPerformed
-
-    private void clearResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearResBtnActionPerformed
-        reservationTable.setModel(new DefaultTableModel());
-    }//GEN-LAST:event_clearResBtnActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void showOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOrderBtnActionPerformed
+        orderTable.setModel(oDao.getAllOrders(connection));
+    }//GEN-LAST:event_showOrderBtnActionPerformed
 
     private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
         if (evt.getClickCount() == 2) { // double-click
@@ -571,9 +632,85 @@ public class RestaurantGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_orderTableMouseClicked
 
+    private void clearEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearEmpBtnActionPerformed
+        employeesTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearEmpBtnActionPerformed
+
+    private void showEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showEmpBtnActionPerformed
+        employeesTable.setModel(eDao.getAllEmployees(connection));
+    }//GEN-LAST:event_showEmpBtnActionPerformed
+
+    private void deleteCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustBtnActionPerformed
+        if(selectedCustId == -1){
+            JOptionPane.showMessageDialog(this, "No customer selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete this customer?",
+            "Confirm Delete",
+            JOptionPane.YES_NO_OPTION
+        );
+        if(confirm == JOptionPane.YES_OPTION){
+            cDao.deleteCustomer(connection, selectedCustId);
+            customersTable.setModel(cDao.getAllCustomers(connection));
+            selectedCustId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Customer ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_deleteCustBtnActionPerformed
+
     private void addCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustBtnActionPerformed
+        String username = custNameField.getText();
+        String phone = custPhoneField.getText();
+        custNameField.setText("");
+        custPhoneField.setText("");
+        cDao.addCustomer(connection, username, phone);
         customersTable.setModel(cDao.getAllCustomers(connection));
     }//GEN-LAST:event_addCustBtnActionPerformed
+
+    private void updateCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCustBtnActionPerformed
+        if(selectedCustId == -1){
+            JOptionPane.showMessageDialog(this, "No customer selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to update this customer?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            String username = custNameField.getText();
+            String phone = custPhoneField.getText();
+            custNameField.setText("");
+            custPhoneField.setText("");
+            cDao.updateCustomer(connection, selectedCustId, username, phone);
+            customersTable.setModel(cDao.getAllCustomers(connection));
+            selectedCustId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Customer ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_updateCustBtnActionPerformed
+
+    private void clearCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCustBtnActionPerformed
+        customersTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_clearCustBtnActionPerformed
+
+    private void showCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCustBtnActionPerformed
+        customersTable.setModel(cDao.getAllCustomers(connection));
+    }//GEN-LAST:event_showCustBtnActionPerformed
+
+    private void customersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customersTableMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = customersTable.getSelectedRow();
+            if (row != -1) {
+                selectedCustId = Integer.parseInt(customersTable.getValueAt(row, 0).toString());
+                String custName = customersTable.getValueAt(row, 1).toString();
+                String custPhone = customersTable.getValueAt(row, 2).toString();
+                custNameField.setText(custName);
+                custPhoneField.setText(custPhone);
+            }
+        }
+    }//GEN-LAST:event_customersTableMouseClicked
     
     /**
      * @param args the command line arguments
@@ -620,21 +757,21 @@ public class RestaurantGui extends javax.swing.JFrame {
     }
     
     private void showOrderItemsDialog(int orderId) {
-    // Create dialog
-    JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Order #" + orderId + " Items", true);
-    dialog.setSize(500, 300);
-    dialog.setLocationRelativeTo(this);
+        // Create dialog
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Order #" + orderId + " Items", true);
+        dialog.setSize(500, 300);
+        dialog.setLocationRelativeTo(this);
 
-    // Create table
-    dialog.add(resultScroll, BorderLayout.CENTER);  
+        // Create table
+        dialog.add(resultScroll, BorderLayout.CENTER);  
 
-    // Fetch data from DAO
-    OrderDao dao = new OrderDao();
-    DefaultTableModel model = dao.getOrderItems(connection, orderId);
-    resultTable.setModel(model);
+        // Fetch data from DAO
+        OrderDao dao = new OrderDao();
+        DefaultTableModel model = dao.getOrderItems(connection, orderId);
+        resultTable.setModel(model);
 
-    dialog.setVisible(true);
-}
+        dialog.setVisible(true);
+    }
 
 
     CustomerDao cDao = new CustomerDao();
@@ -643,6 +780,11 @@ public class RestaurantGui extends javax.swing.JFrame {
     MenuDao mDao = new MenuDao();
     ReservationDao rDao = new ReservationDao();
     static Connection connection = null;
+    private int selectedCustId = -1;
+    private int selectedOrderId = -1;
+    private int selectedMenuId = -1;
+    private int selectedEmpId = -1;
+    private int selectedResId = -1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCustBtn;
@@ -661,25 +803,36 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JScrollPane customersScroll;
     private javax.swing.JTable customersTable;
     private javax.swing.JButton deleteCustBtn;
+    private javax.swing.JButton deleteEmpBtn;
+    private javax.swing.JButton deleteMenuBtn;
+    private javax.swing.JButton deleteOrderBtn;
+    private javax.swing.JButton deleteResBtn;
+    private javax.swing.JTextField empNameField;
+    private javax.swing.JTextField empRoleField;
     private javax.swing.JPanel employeesPanel;
     private javax.swing.JScrollPane employeesScroll;
     private javax.swing.JTable employeesTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField menuCategoryField;
+    private javax.swing.JTextField menuNameField;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JTextField menuPriceField;
     private javax.swing.JScrollPane menuScroll;
     private javax.swing.JTabbedPane menuTabPane;
     private javax.swing.JTable menuTable;
     private javax.swing.JPanel orderPanel;
     private javax.swing.JScrollPane orderScroll;
+    private javax.swing.JComboBox<String> orderStatusCombo;
     private javax.swing.JTable orderTable;
-    private javax.swing.JPanel queryPanel;
-    private javax.swing.JComboBox<String> querySelector;
+    private javax.swing.JComboBox<String> resStatusCombo;
     private javax.swing.JPanel reservationPanel;
     private javax.swing.JScrollPane reservationScroll;
     private javax.swing.JTable reservationTable;

@@ -13,10 +13,9 @@ public class CustomerDao {
                 return false;
             }
         };
-        try { 
+        try(Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);) { 
             
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
             int cols = rsmd.getColumnCount();
 
@@ -43,5 +42,51 @@ public class CustomerDao {
             }
         }
         return model;
+    }
+
+    public void addCustomer(Connection connection, String username, String phone){
+        String query = PropertyLoader.get("add.customer");
+        try(PreparedStatement prst = connection.prepareStatement(query);) { 
+            prst.setString(1, username);
+            prst.setString(2, phone);
+            prst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
+
+    }
+    
+    public void updateCustomer(Connection connection, int custID, String username, String phone){
+        String query = PropertyLoader.get("update.customer");
+        try(PreparedStatement prst = connection.prepareStatement(query);) { 
+            prst.setInt(1, custID);
+            prst.setString(2, username);
+            prst.setString(3, phone);
+            prst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
+    }
+    
+    public void deleteCustomer(Connection connection, int custID){
+        String query = PropertyLoader.get("delete.customer");
+        try(PreparedStatement prst = connection.prepareStatement(query);){
+            prst.setInt(1, custID);
+            prst.executeUpdate();
+        } catch (SQLException ex){
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
     }
 }

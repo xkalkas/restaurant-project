@@ -188,14 +188,10 @@ FOR EACH ROW EXECUTE PROCEDURE process_res_audit();
 -- Create Customer
 CREATE OR REPLACE PROCEDURE add_customer(
 in_customer_name VARCHAR(255),
-in_phone VARCHAR(100),
-OUT out_new_id INT)
-LANGUAGE plpgsql
+in_phone VARCHAR(100))
 AS $$
-BEGIN
   INSERT INTO customers(customer_name, phone) VALUES(in_customer_name,in_phone)
-  RETURNING customer_id INTO out_new_id;
-END; $$;
+$$ LANGUAGE SQL
 
 -- Update Customer
 CREATE OR REPLACE PROCEDURE update_customer(
@@ -389,8 +385,14 @@ SELECT * FROM Orders;
 $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION getOrderItems(int) 
-RETURNS SETOF OrderItems AS $$
-SELECT * FROM OrderItems WHERE order_id = $1;
+RETURNS TABLE (
+	item_name VARCHAR(100),
+	quantity INT,
+	subtotal INT)
+AS $$
+	SELECT m.item_name, o.quantity, m.price*o.quantity AS subtotal
+	FROM OrderItems o INNER JOIN MenuItems m ON o.item_id = m.item_id 
+	WHERE order_id = $1;
 $$ LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION getMenuItems() 
