@@ -191,7 +191,7 @@ in_customer_name VARCHAR(255),
 in_phone VARCHAR(100))
 AS $$
   INSERT INTO customers(customer_name, phone) VALUES(in_customer_name,in_phone)
-$$ LANGUAGE SQL
+$$ LANGUAGE SQL;
 
 -- Update Customer
 CREATE OR REPLACE PROCEDURE update_customer(
@@ -215,21 +215,17 @@ BEGIN
   DELETE FROM customers WHERE customer_id=in_id;
 END; $$;
 
----- Customers
+---- Employees
 
--- Create Customer
+-- Create Employee
 CREATE OR REPLACE PROCEDURE add_employee(
 in_emp_name VARCHAR(255),
-in_emp_role role_type,
-OUT out_new_id INT)
-LANGUAGE plpgsql
+in_emp_role role_type)
 AS $$
-BEGIN
   INSERT INTO employees(emp_name, emp_role) VALUES(in_emp_name,in_emp_role)
-  RETURNING employee_id INTO out_new_id;
-END; $$;
+$$ LANGUAGE SQL;
 
--- Update Customer
+-- Update Employee
 CREATE OR REPLACE PROCEDURE update_employee(
 in_employee_id INT,
 in_emp_name VARCHAR(255),
@@ -242,7 +238,7 @@ BEGIN
   WHERE employee_id = in_employee_id;
 END; $$;
 
--- Delete Customer
+-- Delete Employee
 CREATE OR REPLACE PROCEDURE delete_employee(
 in_id INT)
 LANGUAGE plpgsql
@@ -257,16 +253,10 @@ END; $$;
 -- Create Order
 CREATE OR REPLACE PROCEDURE create_order(
   in_customer_id INT,
-  in_employee_id INT,
-  OUT out_order_id INT
-)
-LANGUAGE plpgsql
+  in_employee_id INT)
 AS $$
-BEGIN
-  INSERT INTO orders(customer_id, employee_id)
-  VALUES(in_customer_id,in_employee_id)
-  RETURNING id INTO out_order_id;
-END; $$;
+  INSERT INTO orders(customer_id, employee_id) VALUES(in_customer_id,in_employee_id)
+$$ LANGUAGE SQL;
 
 -- Update Order Status
 CREATE OR REPLACE PROCEDURE update_order_status(
@@ -309,16 +299,10 @@ END; $$;
 -- Add Reservation
 CREATE OR REPLACE PROCEDURE add_reservation(
   in_customer_id INT,
-  in_num_people INT,
-  OUT out_res_id INT
-)
-LANGUAGE plpgsql
+  in_num_people INT)
 AS $$
-BEGIN
-  INSERT INTO reservations(customer_id,num_people)
-  VALUES(in_customer_id,in_num_people)
-  RETURNING id INTO out_res_id;
-END; $$;
+  INSERT INTO reservations(customer_id,num_people) VALUES(in_customer_id,in_num_people)
+$$ LANGUAGE SQL;
 
 
 -- Update Reservation Status
@@ -335,15 +319,10 @@ END; $$;
 CREATE OR REPLACE PROCEDURE add_menuitem(
   in_name VARCHAR,
   in_category category_type,
-  in_price INT,
-  OUT out_new_id INT
-)
-LANGUAGE plpgsql
+  in_price INT)
 AS $$
-BEGIN
   INSERT INTO menuitems(item_name,category,price) VALUES(in_name,in_category,in_price)
-  RETURNING item_id INTO out_new_id;
-END; $$;
+$$ LANGUAGE SQL;
 
 -- Update Menu Item
 CREATE OR REPLACE PROCEDURE update_menuitem(

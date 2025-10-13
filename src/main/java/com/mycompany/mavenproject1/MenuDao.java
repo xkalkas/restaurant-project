@@ -5,6 +5,7 @@
 package com.mycompany.mavenproject1;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -54,6 +55,53 @@ public class MenuDao {
                 }
             }
         return model;
+    }
+
+    void addMenuItem(Connection connection, String itemName, String category, int price) {
+        String query = PropertyLoader.get("add.menuItem");
+        try(PreparedStatement prst = connection.prepareStatement(query);) { 
+            prst.setString(1, itemName);
+            prst.setString(2, category);
+            prst.setInt(3, price);
+            prst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
+    }
+
+    void updateMenuItem(Connection connection, int menuID, String itemName, String category, int price) {
+        String query = PropertyLoader.get("update.menuItem");
+        try(PreparedStatement prst = connection.prepareStatement(query);) { 
+            prst.setInt(1, menuID);
+            prst.setString(2, itemName);
+            prst.setString(3, category);
+            prst.setInt(4, price);
+            prst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
+    }
+
+    void deleteMenuItem(Connection connection, int menuID) {
+        String query = PropertyLoader.get("delete.menuItem");
+        try(PreparedStatement prst = connection.prepareStatement(query);){
+            prst.setInt(1, menuID);
+            prst.executeUpdate();
+        } catch (SQLException ex){
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
     }
     
 }

@@ -5,6 +5,7 @@
 package com.mycompany.mavenproject1;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -54,6 +55,51 @@ public class EmployeeDao {
                 }
             }
         return model;
+    }
+
+    void addEmployee(Connection connection, String username, String role) {
+        String query = PropertyLoader.get("add.employee");
+        try(PreparedStatement prst = connection.prepareStatement(query);) { 
+            prst.setString(1, username);
+            prst.setString(2, role);
+            prst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
+    }
+
+    void updateEmployee(Connection connection, int empID, String username, String role) {
+        String query = PropertyLoader.get("update.employee");
+        try(PreparedStatement prst = connection.prepareStatement(query);) { 
+            prst.setInt(1, empID);
+            prst.setString(2, username);
+            prst.setString(3, role);
+            prst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
+    }
+
+    void deleteEmployee(Connection connection, int empID) {
+        String query = PropertyLoader.get("delete.employee");
+        try(PreparedStatement prst = connection.prepareStatement(query);){
+            prst.setInt(1, empID);
+            prst.executeUpdate();
+        } catch (SQLException ex){
+            System.err.println("SQL Error:");
+            while (ex != null) {
+                System.err.println("Message: " + ex.getMessage());
+                ex = ex.getNextException();
+            }
+        }
     }
     
     

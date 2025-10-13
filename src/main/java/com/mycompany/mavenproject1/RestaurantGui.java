@@ -55,9 +55,9 @@ public class RestaurantGui extends javax.swing.JFrame {
         addEmpBtn = new javax.swing.JButton();
         deleteEmpBtn = new javax.swing.JButton();
         empNameField = new javax.swing.JTextField();
-        empRoleField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        empRoleCombo = new javax.swing.JComboBox<>();
         orderPanel = new javax.swing.JPanel();
         orderScroll = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
@@ -79,9 +79,9 @@ public class RestaurantGui extends javax.swing.JFrame {
         menuNameField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        menuCategoryField = new javax.swing.JTextField();
         menuPriceField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        menuCategoryCombo = new javax.swing.JComboBox<>();
         reservationPanel = new javax.swing.JPanel();
         reservationScroll = new javax.swing.JScrollPane();
         reservationTable = new javax.swing.JTable();
@@ -247,6 +247,11 @@ public class RestaurantGui extends javax.swing.JFrame {
 
             }
         ));
+        employeesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeesTableMouseClicked(evt);
+            }
+        });
         employeesScroll.setViewportView(employeesTable);
 
         showEmpBtn.setText("Show");
@@ -264,14 +269,31 @@ public class RestaurantGui extends javax.swing.JFrame {
         });
 
         updateEmpBtn.setText("Update");
+        updateEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmpBtnActionPerformed(evt);
+            }
+        });
 
         addEmpBtn.setText("Add");
+        addEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEmpBtnActionPerformed(evt);
+            }
+        });
 
         deleteEmpBtn.setText("Delete");
+        deleteEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEmpBtnActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Name");
 
         jLabel4.setText("Role");
+
+        empRoleCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Host", "Server", "Cook"}));
 
         javax.swing.GroupLayout employeesPanelLayout = new javax.swing.GroupLayout(employeesPanel);
         employeesPanel.setLayout(employeesPanelLayout);
@@ -298,9 +320,9 @@ public class RestaurantGui extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(empNameField)
-                                    .addComponent(empRoleField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(empNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(empRoleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(12, 12, 12))
         );
         employeesPanelLayout.setVerticalGroup(
@@ -315,8 +337,8 @@ public class RestaurantGui extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(empRoleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                            .addComponent(jLabel4)
+                            .addComponent(empRoleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(employeesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addEmpBtn)
@@ -412,6 +434,11 @@ public class RestaurantGui extends javax.swing.JFrame {
 
         menuTabPane.addTab("Orders", orderPanel);
 
+        menuTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuTableMouseClicked(evt);
+            }
+        });
         menuScroll.setViewportView(menuTable);
 
         showMenuBtn.setText("Show");
@@ -429,16 +456,33 @@ public class RestaurantGui extends javax.swing.JFrame {
         });
 
         updateMenuBtn.setText("Update");
+        updateMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMenuBtnActionPerformed(evt);
+            }
+        });
 
         addMenuBtn.setText("Add");
+        addMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMenuBtnActionPerformed(evt);
+            }
+        });
 
         deleteMenuBtn.setText("Delete");
+        deleteMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMenuBtnActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Name");
 
         jLabel7.setText("Category");
 
         jLabel8.setText("Price");
+
+        menuCategoryCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Appetizer", "Entree", "Salad", "Dessert", "Drink"}));
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -466,7 +510,7 @@ public class RestaurantGui extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(menuCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(menuCategoryCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -485,8 +529,8 @@ public class RestaurantGui extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(menuCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(menuCategoryCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(menuPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -568,12 +612,12 @@ public class RestaurantGui extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(resStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearResBtn)
+                .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(updateResBtn)
                         .addComponent(deleteResBtn)
-                        .addComponent(addResBtn)))
+                        .addComponent(addResBtn))
+                    .addComponent(clearResBtn))
                 .addGap(18, 18, 18)
                 .addComponent(reservationScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(132, Short.MAX_VALUE))
@@ -606,6 +650,59 @@ public class RestaurantGui extends javax.swing.JFrame {
         reservationTable.setModel(rDao.getAllReservations(connection));
     }//GEN-LAST:event_showResBtnActionPerformed
 
+    private void deleteMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMenuBtnActionPerformed
+        if(selectedMenuId == -1){
+            JOptionPane.showMessageDialog(this, "No menu item selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete this menu item?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            mDao.deleteMenuItem(connection, selectedMenuId);
+            menuTable.setModel(mDao.getAllMenuItems(connection));
+            selectedMenuId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Menu Item ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_deleteMenuBtnActionPerformed
+
+    private void addMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMenuBtnActionPerformed
+        String itemName = menuNameField.getText();
+        String category = String.valueOf(menuCategoryCombo.getSelectedItem());
+        int price = Integer.parseInt(menuPriceField.getText());
+        menuNameField.setText("");
+        menuPriceField.setText("");
+        mDao.addMenuItem(connection, itemName, category, price);
+        menuTable.setModel(mDao.getAllMenuItems(connection));
+    }//GEN-LAST:event_addMenuBtnActionPerformed
+
+    private void updateMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMenuBtnActionPerformed
+        if(selectedMenuId == -1){
+            JOptionPane.showMessageDialog(this, "No menu item selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to update this menu item?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            String itemName = menuNameField.getText();
+            String category = String.valueOf(menuCategoryCombo.getSelectedItem());
+            int price = Integer.parseInt(menuPriceField.getText());
+            menuNameField.setText("");
+            menuPriceField.setText("");
+            mDao.updateMenuItem(connection, selectedMenuId, itemName, category, price);
+            menuTable.setModel(mDao.getAllMenuItems(connection));
+            selectedMenuId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Menu Item ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_updateMenuBtnActionPerformed
+
     private void clearMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearMenuBtnActionPerformed
         menuTable.setModel(new DefaultTableModel());
     }//GEN-LAST:event_clearMenuBtnActionPerformed
@@ -613,6 +710,21 @@ public class RestaurantGui extends javax.swing.JFrame {
     private void showMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMenuBtnActionPerformed
         menuTable.setModel(mDao.getAllMenuItems(connection));
     }//GEN-LAST:event_showMenuBtnActionPerformed
+
+    private void menuTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTableMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = menuTable.getSelectedRow();
+            if (row != -1) {
+                selectedMenuId = Integer.parseInt(employeesTable.getValueAt(row, 0).toString());
+                String menuName = menuTable.getValueAt(row, 1).toString();
+                String menuCategory = menuTable.getValueAt(row, 2).toString();
+                String menuPrice = menuTable.getValueAt(row, 3).toString();
+                menuNameField.setText(menuName);
+                menuCategoryCombo.setSelectedItem(menuCategory);
+                menuPriceField.setText(menuPrice);
+            }
+        }
+    }//GEN-LAST:event_menuTableMouseClicked
 
     private void clearOrdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOrdBtnActionPerformed
         orderTable.setModel(new DefaultTableModel());
@@ -632,6 +744,55 @@ public class RestaurantGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_orderTableMouseClicked
 
+    private void deleteEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmpBtnActionPerformed
+        if(selectedEmpId == -1){
+            JOptionPane.showMessageDialog(this, "No employee selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete this employee?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            eDao.deleteEmployee(connection, selectedEmpId);
+            employeesTable.setModel(eDao.getAllEmployees(connection));
+            selectedEmpId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Employee ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_deleteEmpBtnActionPerformed
+
+    private void addEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmpBtnActionPerformed
+        String username = empNameField.getText();
+        String role = String.valueOf(empRoleCombo.getSelectedItem());
+        empNameField.setText("");
+        eDao.addEmployee(connection, username, role);
+        employeesTable.setModel(eDao.getAllEmployees(connection));
+    }//GEN-LAST:event_addEmpBtnActionPerformed
+
+    private void updateEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmpBtnActionPerformed
+        if(selectedEmpId == -1){
+            JOptionPane.showMessageDialog(this, "No employee selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to update this employee?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            String username = empNameField.getText();
+            String role = String.valueOf(empRoleCombo.getSelectedItem());
+            empNameField.setText("");
+            eDao.updateEmployee(connection, selectedEmpId, username, role);
+            employeesTable.setModel(eDao.getAllEmployees(connection));
+            selectedEmpId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Employee ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_updateEmpBtnActionPerformed
+
     private void clearEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearEmpBtnActionPerformed
         employeesTable.setModel(new DefaultTableModel());
     }//GEN-LAST:event_clearEmpBtnActionPerformed
@@ -639,6 +800,19 @@ public class RestaurantGui extends javax.swing.JFrame {
     private void showEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showEmpBtnActionPerformed
         employeesTable.setModel(eDao.getAllEmployees(connection));
     }//GEN-LAST:event_showEmpBtnActionPerformed
+
+    private void employeesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeesTableMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = employeesTable.getSelectedRow();
+            if (row != -1) {
+                selectedEmpId = Integer.parseInt(employeesTable.getValueAt(row, 0).toString());
+                String empName = employeesTable.getValueAt(row, 1).toString();
+                String empRole = employeesTable.getValueAt(row, 2).toString();
+                empNameField.setText(empName);
+                empRoleCombo.setSelectedItem(empRole);
+            }
+        }
+    }//GEN-LAST:event_employeesTableMouseClicked
 
     private void deleteCustBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustBtnActionPerformed
         if(selectedCustId == -1){
@@ -711,6 +885,8 @@ public class RestaurantGui extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_customersTableMouseClicked
+    
+    
     
     /**
      * @param args the command line arguments
@@ -808,7 +984,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JButton deleteOrderBtn;
     private javax.swing.JButton deleteResBtn;
     private javax.swing.JTextField empNameField;
-    private javax.swing.JTextField empRoleField;
+    private javax.swing.JComboBox<String> empRoleCombo;
     private javax.swing.JPanel employeesPanel;
     private javax.swing.JScrollPane employeesScroll;
     private javax.swing.JTable employeesTable;
@@ -821,7 +997,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField menuCategoryField;
+    private javax.swing.JComboBox<String> menuCategoryCombo;
     private javax.swing.JTextField menuNameField;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField menuPriceField;
