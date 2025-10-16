@@ -2,7 +2,6 @@ package com.mycompany.mavenproject1;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.sql.*;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -33,6 +32,12 @@ public class RestaurantGui extends javax.swing.JFrame {
         resultsFrame = new javax.swing.JFrame();
         resultScroll = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
+        createFrame = new javax.swing.JFrame();
+        submitBtn = new javax.swing.JButton();
+        empOrderIdField = new javax.swing.JTextField();
+        custOrderIdFIeld = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         menuTabPane = new javax.swing.JTabbedPane();
         customersPanel = new javax.swing.JPanel();
         customersScroll = new javax.swing.JScrollPane();
@@ -68,6 +73,7 @@ public class RestaurantGui extends javax.swing.JFrame {
         deleteOrderBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         orderStatusCombo = new javax.swing.JComboBox<>();
+        orderItemsBtn = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         menuScroll = new javax.swing.JScrollPane();
         menuTable = new javax.swing.JTable();
@@ -92,6 +98,11 @@ public class RestaurantGui extends javax.swing.JFrame {
         deleteResBtn = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         resStatusCombo = new javax.swing.JComboBox<>();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        showAuditMenuItem = new javax.swing.JMenuItem();
+        exitMenuItem = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,6 +133,48 @@ public class RestaurantGui extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(resultScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        submitBtn.setText("Submit");
+
+        jLabel10.setText("Employee ID");
+
+        jLabel11.setText("Customer ID");
+
+        javax.swing.GroupLayout createFrameLayout = new javax.swing.GroupLayout(createFrame.getContentPane());
+        createFrame.getContentPane().setLayout(createFrameLayout);
+        createFrameLayout.setHorizontalGroup(
+            createFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createFrameLayout.createSequentialGroup()
+                .addGroup(createFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createFrameLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(createFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(createFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(empOrderIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(custOrderIdFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(createFrameLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(submitBtn)))
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+        createFrameLayout.setVerticalGroup(
+            createFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createFrameLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(createFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(empOrderIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(createFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(custOrderIdFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addComponent(submitBtn)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -234,7 +287,7 @@ public class RestaurantGui extends javax.swing.JFrame {
                         .addComponent(clearCustBtn)))
                 .addGap(18, 18, 18)
                 .addComponent(customersScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Customers", customersPanel);
@@ -347,7 +400,7 @@ public class RestaurantGui extends javax.swing.JFrame {
                     .addComponent(clearEmpBtn))
                 .addGap(18, 18, 18)
                 .addComponent(employeesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Employees", employeesPanel);
@@ -374,14 +427,36 @@ public class RestaurantGui extends javax.swing.JFrame {
         });
 
         addOrderBtn.setText("Add");
+        addOrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addOrderBtnActionPerformed(evt);
+            }
+        });
 
         updateOrderBtn.setText("Update");
+        updateOrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateOrderBtnActionPerformed(evt);
+            }
+        });
 
         deleteOrderBtn.setText("Delete");
+        deleteOrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteOrderBtnActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Status");
 
-        orderStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        orderStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IN_PROGRESS", "SERVED", "CANCELLED"}));
+
+        orderItemsBtn.setText("Open Order");
+        orderItemsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderItemsBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
@@ -390,24 +465,29 @@ public class RestaurantGui extends javax.swing.JFrame {
             .addGroup(orderPanelLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(orderScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
-                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(showOrderBtn)
-                            .addComponent(clearOrdBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(orderPanelLayout.createSequentialGroup()
-                                .addComponent(addOrderBtn)
-                                .addGap(15, 15, 15)
-                                .addComponent(updateOrderBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(orderPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(orderStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(12, 12, 12))
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addComponent(orderItemsBtn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(orderScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderPanelLayout.createSequentialGroup()
+                                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(showOrderBtn)
+                                    .addComponent(clearOrdBtn))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(orderPanelLayout.createSequentialGroup()
+                                        .addComponent(addOrderBtn)
+                                        .addGap(15, 15, 15)
+                                        .addComponent(updateOrderBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(deleteOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(orderPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(orderStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(12, 12, 12))))
         );
         orderPanelLayout.setVerticalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,7 +509,9 @@ public class RestaurantGui extends javax.swing.JFrame {
                             .addComponent(addOrderBtn))))
                 .addGap(18, 18, 18)
                 .addComponent(orderScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(orderItemsBtn)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Orders", orderPanel);
@@ -546,7 +628,7 @@ public class RestaurantGui extends javax.swing.JFrame {
                         .addComponent(clearMenuBtn)))
                 .addGap(18, 18, 18)
                 .addComponent(menuScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Menu", menuPanel);
@@ -575,7 +657,7 @@ public class RestaurantGui extends javax.swing.JFrame {
 
         jLabel9.setText("Status");
 
-        resStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        resStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDING", "CONFIRMED", "CANCELLED", "SEATED" }));
 
         javax.swing.GroupLayout reservationPanelLayout = new javax.swing.GroupLayout(reservationPanel);
         reservationPanel.setLayout(reservationPanelLayout);
@@ -620,10 +702,35 @@ public class RestaurantGui extends javax.swing.JFrame {
                     .addComponent(clearResBtn))
                 .addGap(18, 18, 18)
                 .addComponent(reservationScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         menuTabPane.addTab("Reservations", reservationPanel);
+
+        jMenu1.setText("File");
+
+        showAuditMenuItem.setText("Show Audit");
+        showAuditMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showAuditMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(showAuditMenuItem);
+
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exitMenuItem);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("About");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -735,12 +842,11 @@ public class RestaurantGui extends javax.swing.JFrame {
     }//GEN-LAST:event_showOrderBtnActionPerformed
 
     private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
-        if (evt.getClickCount() == 2) { // double-click
-            int row = orderTable.getSelectedRow();
-            if (row != -1) {
-                int orderId = Integer.parseInt(orderTable.getValueAt(row, 0).toString());
-                showOrderItemsDialog(orderId);
-            }
+        int row = orderTable.getSelectedRow();
+        if (row != -1) {
+            selectedOrderId = Integer.parseInt(orderTable.getValueAt(row, 0).toString());
+            String orderStatus = orderTable.getValueAt(row, 4).toString();
+            orderStatusCombo.setSelectedItem(orderStatus);
         }
     }//GEN-LAST:event_orderTableMouseClicked
 
@@ -885,6 +991,78 @@ public class RestaurantGui extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_customersTableMouseClicked
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to exit?", "Exit Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void showAuditMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAuditMenuItemActionPerformed
+        // Create dialog
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Audit", true);
+        dialog.setSize(500, 300);
+        dialog.setLocationRelativeTo(this);
+
+        // Create table
+        dialog.add(resultScroll, BorderLayout.CENTER);  
+
+        // Fetch data from DAO
+        DefaultTableModel model = aDao.getAuditLog(connection);
+        resultTable.setModel(model);
+
+        dialog.setVisible(true);
+    }//GEN-LAST:event_showAuditMenuItemActionPerformed
+
+    private void addOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderBtnActionPerformed
+        addOrderItemsDialog();
+    }//GEN-LAST:event_addOrderBtnActionPerformed
+
+    private void updateOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateOrderBtnActionPerformed
+        if(selectedOrderId == -1){
+            JOptionPane.showMessageDialog(this, "No order selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to update this order?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            String status = orderStatusCombo.getSelectedItem().toString();
+            oDao.updateOrder(connection, selectedOrderId, status);
+            orderTable.setModel(oDao.getAllOrders(connection));
+            selectedOrderId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Order ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_updateOrderBtnActionPerformed
+
+    private void deleteOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOrderBtnActionPerformed
+        if(selectedOrderId == -1){
+            JOptionPane.showMessageDialog(this, "No order selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete this order?",
+            "Confirm Update",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            oDao.deleteOrder(connection, selectedOrderId);
+            orderTable.setModel(oDao.getAllOrders(connection));
+            selectedOrderId = -1;
+        }else
+        JOptionPane.showMessageDialog(this, "Error: Order ID not found in database!", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_deleteOrderBtnActionPerformed
+
+    private void orderItemsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderItemsBtnActionPerformed
+       showOrderItemsDialog(selectedOrderId);
+    }//GEN-LAST:event_orderItemsBtnActionPerformed
     
     
     
@@ -942,11 +1120,25 @@ public class RestaurantGui extends javax.swing.JFrame {
         dialog.add(resultScroll, BorderLayout.CENTER);  
 
         // Fetch data from DAO
-        OrderDao dao = new OrderDao();
-        DefaultTableModel model = dao.getOrderItems(connection, orderId);
+        DefaultTableModel model = oDao.getOrderItems(connection, orderId);
         resultTable.setModel(model);
 
         dialog.setVisible(true);
+    }
+    
+    private void addOrderItemsDialog() {
+        // Create dialog
+        JDialog dialog = new JDialog((JFrame) SwingUtilities.getWindowAncestor(this), "Create Order", true);
+        dialog.setSize(500, 300);
+        dialog.setLocationRelativeTo(this);
+
+        
+        dialog.add(custOrderIdFIeld, BorderLayout.CENTER);
+        dialog.add(empOrderIdField, BorderLayout.CENTER);
+        
+        
+        dialog.setVisible(true);
+        
     }
 
 
@@ -955,6 +1147,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     OrderDao oDao = new OrderDao();
     MenuDao mDao = new MenuDao();
     ReservationDao rDao = new ReservationDao();
+    AuditDao aDao = new AuditDao();
     static Connection connection = null;
     private int selectedCustId = -1;
     private int selectedOrderId = -1;
@@ -973,7 +1166,9 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JButton clearMenuBtn;
     private javax.swing.JButton clearOrdBtn;
     private javax.swing.JButton clearResBtn;
+    private javax.swing.JFrame createFrame;
     private javax.swing.JTextField custNameField;
+    private javax.swing.JTextField custOrderIdFIeld;
     private javax.swing.JTextField custPhoneField;
     private javax.swing.JPanel customersPanel;
     private javax.swing.JScrollPane customersScroll;
@@ -984,11 +1179,15 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JButton deleteOrderBtn;
     private javax.swing.JButton deleteResBtn;
     private javax.swing.JTextField empNameField;
+    private javax.swing.JTextField empOrderIdField;
     private javax.swing.JComboBox<String> empRoleCombo;
     private javax.swing.JPanel employeesPanel;
     private javax.swing.JScrollPane employeesScroll;
     private javax.swing.JTable employeesTable;
+    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -997,6 +1196,9 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JComboBox<String> menuCategoryCombo;
     private javax.swing.JTextField menuNameField;
     private javax.swing.JPanel menuPanel;
@@ -1004,6 +1206,7 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JScrollPane menuScroll;
     private javax.swing.JTabbedPane menuTabPane;
     private javax.swing.JTable menuTable;
+    private javax.swing.JButton orderItemsBtn;
     private javax.swing.JPanel orderPanel;
     private javax.swing.JScrollPane orderScroll;
     private javax.swing.JComboBox<String> orderStatusCombo;
@@ -1015,11 +1218,13 @@ public class RestaurantGui extends javax.swing.JFrame {
     private javax.swing.JScrollPane resultScroll;
     private javax.swing.JTable resultTable;
     private javax.swing.JFrame resultsFrame;
+    private javax.swing.JMenuItem showAuditMenuItem;
     private javax.swing.JButton showCustBtn;
     private javax.swing.JButton showEmpBtn;
     private javax.swing.JButton showMenuBtn;
     private javax.swing.JButton showOrderBtn;
     private javax.swing.JButton showResBtn;
+    private javax.swing.JButton submitBtn;
     private javax.swing.JButton updateCustBtn;
     private javax.swing.JButton updateEmpBtn;
     private javax.swing.JButton updateMenuBtn;

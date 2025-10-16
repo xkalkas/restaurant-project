@@ -93,4 +93,12 @@ public class OrderDao {
         }
         return model;   
     }
+
+    void deleteOrder(Connection connection, int orderID) {
+        
+    }
+
+    void updateOrder(Connection connection, int orderID, String status) {
+        
+    }
 }
